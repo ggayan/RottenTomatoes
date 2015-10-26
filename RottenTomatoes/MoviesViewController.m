@@ -13,11 +13,14 @@
 #import "UIImageView+FadeInImages.h"
 #import "MBProgressHUD.h"
 
-@interface MoviesViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface MoviesViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic, getter=isHidden) IBOutlet UIView *networkErrorView;
 @property (strong, nonatomic) NSArray *movies;
+@property (strong, nonatomic) NSArray *filteredMovies;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) NSString *searchTerm;
 
 @end
 
@@ -30,6 +33,7 @@
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.searchBar.delegate = self;
     
     self.refreshControl = [UIRefreshControl new];
     [self.refreshControl addTarget:self action:@selector(onRefresh) forControlEvents:UIControlEventValueChanged];
@@ -39,7 +43,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.movies.count;
+    return self.filteredMovies.count;
 }
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
@@ -48,10 +52,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MovieCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"MovieCell"];
     
-    cell.titleLabel.text = self.movies[indexPath.row][@"title"];
-    cell.synopsisLabel.text = self.movies[indexPath.row][@"synopsis"];
+    cell.titleLabel.text = self.filteredMovies[indexPath.row][@"title"];
+    cell.synopsisLabel.text = self.filteredMovies[indexPath.row][@"synopsis"];
     
-    NSURL *url = [NSURL URLWithString:self.movies[indexPath.row][@"posters"][@"thumbnail"]];
+    NSURL *url = [NSURL URLWithString:self.filteredMovies[indexPath.row][@"posters"][@"thumbnail"]];
 //    [cell.posterImageView setImageWithURL:url];
     [cell.posterImageView setImageWithURLAndFadeIn:url];
     
@@ -61,7 +65,7 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     
     MovieDetailsViewController *vc = segue.destinationViewController;
-    vc.movie = self.movies[indexPath.row];
+    vc.movie = self.filteredMovies[indexPath.row];
     vc.placeHolderImage = cell.posterImageView.image;
 }
 
@@ -99,7 +103,7 @@
                                                                                     options:kNilOptions
                                                                                       error:&jsonError];
                                                     self.movies = response[@"movies"];
-                                                    [self.tableView reloadData];
+                                                    [self filterMovies];
                                                     [self.networkErrorView setHidden:true];
                                                 } else {
                                                     NSLog(@"An error occurred: %@", error.description);
@@ -113,6 +117,23 @@
 
 - (void)onRefresh {
     [self fetchMovies];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    self.searchTerm = searchText;
+    [self filterMovies];
+}
+
+- (void)filterMovies {
+    if ([self.searchTerm length] > 0) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                  @"(title CONTAINS[c] %@)", self.searchTerm];
+        self.filteredMovies = [self.movies filteredArrayUsingPredicate:predicate];
+    }
+    else {
+        self.filteredMovies = self.movies;
+    }
+    [self.tableView reloadData];
 }
 
 @end
