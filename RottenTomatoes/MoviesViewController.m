@@ -30,6 +30,9 @@
     [super viewDidLoad];
     [self.networkErrorView setHidden:YES];
     self.title = @"Movies";
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
+    [self.navigationController.navigationBar setBackgroundColor:[UIColor blackColor]];
+    [self.navigationController.navigationBar setAlpha:0.6];
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -52,11 +55,15 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MovieCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"MovieCell"];
     
+    UIView *bgColorView = [[UIView alloc] init];
+    bgColorView.backgroundColor = [UIColor colorWithRed:51.0/255 green:102.0/255 blue:153.0/255 alpha:1.0];
+    [cell setSelectedBackgroundView:bgColorView];
+    
     cell.titleLabel.text = self.filteredMovies[indexPath.row][@"title"];
     cell.synopsisLabel.text = self.filteredMovies[indexPath.row][@"synopsis"];
     
     NSURL *url = [NSURL URLWithString:self.filteredMovies[indexPath.row][@"posters"][@"thumbnail"]];
-//    [cell.posterImageView setImageWithURL:url];
+
     [cell.posterImageView setImageWithURLAndFadeIn:url];
     
     return cell;
