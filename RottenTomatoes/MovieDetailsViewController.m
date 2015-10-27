@@ -20,16 +20,16 @@
     self.titleLabel.text = self.movie[@"title"];
     self.synopsisLabel.text = self.movie[@"synopsis"];
     
-    float afterResize = self.synopsisLabel.bounds.size.height;
-    [self.synopsisLabel sizeToFit];
     float beforeResize = self.synopsisLabel.bounds.size.height;
+    [self.synopsisLabel sizeToFit];
+    float afterResize = self.synopsisLabel.bounds.size.height;
     
     CGSize scrollViewSize = self.scrollView.bounds.size;
     self.scrollView.contentSize = CGSizeMake(scrollViewSize.width, scrollViewSize.height +
-                                             MAX(0.0, beforeResize - afterResize));
+                                             MAX(0.0, afterResize - beforeResize));
     
     CGRect contentRect = self.contentView.frame;
-    contentRect.size.height = self.scrollView.bounds.size.height;
+    contentRect.size.height = self.scrollView.contentSize.height;
     self.contentView.frame = contentRect;
     
     NSString *lowResUrl = self.movie[@"posters"][@"thumbnail"];
