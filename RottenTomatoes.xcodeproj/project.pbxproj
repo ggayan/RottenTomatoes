@@ -39,6 +39,8 @@
 		D0E17AE51BD6F29100D32C7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0E17AEB1BD6F87700D32C7C /* MovieCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieCell.h; sourceTree = "<group>"; };
 		D0E17AEC1BD6F87700D32C7C /* MovieCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieCell.m; sourceTree = "<group>"; };
+		D0F17DF91BDF08E0001F8486 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D0F17DFA1BDF1384001F8486 /* walkthrough.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = walkthrough.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,8 @@
 		D0E17AC81BD6F29100D32C7C = {
 			isa = PBXGroup;
 			children = (
+				D0F17DFA1BDF1384001F8486 /* walkthrough.gif */,
+				D0F17DF91BDF08E0001F8486 /* README.md */,
 				D0E17AD31BD6F29100D32C7C /* RottenTomatoes */,
 				D0E17AD21BD6F29100D32C7C /* Products */,
 				22BF6CA9E9E7308F7C0B8E8B /* Pods */,
