@@ -12,11 +12,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="87" sectionHeaderHeight="28" sectionFooterHeight="28" id="vHe-Jn-btU">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="87" sectionHeaderHeight="28" sectionFooterHeight="28" id="vHe-Jn-btU">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="BDF-Sb-tIb">
                                     <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -28,7 +29,7 @@
                                         <rect key="frame" x="0.0" y="136" width="320" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zcQ-DW-r9Y" id="tSx-Y6-hZu">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="86.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="86"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZgB-sM-59Q">
@@ -56,6 +57,7 @@
                                             <animations/>
                                         </tableViewCellContentView>
                                         <animations/>
+                                        <gestureRecognizers/>
                                         <connections>
                                             <outlet property="posterImageView" destination="yfz-fY-Mfv" id="mXe-bw-IiE"/>
                                             <outlet property="synopsisLabel" destination="Acn-ZI-M5Z" id="8IJ-Ex-9Pm"/>
